@@ -90,7 +90,7 @@ type StateContextType = {
 // React.Dispatch<React.SetStateAction<boolean>>
 // React.Dispatch<React.SetStateAction<never[]>>
 
-const StateContext = createContext<StateContextType | null>(null);
+const StateContext = createContext<StateContextType | undefined>(undefined);
 
 const currentDate = new Date();
 const year = currentDate.getFullYear();
