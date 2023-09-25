@@ -26,44 +26,44 @@ type Props = {
 };
 
 type StateContextType = {
-  name: string;
-  setName: React.Dispatch<React.SetStateAction<string>>;
-  businessName: string;
-  setBusinessName: React.Dispatch<React.SetStateAction<string>>;
-  businessSlogan: string;
-  setBusinessSlogan: React.Dispatch<React.SetStateAction<string>>;
-  businessAddress: string;
-  setBusinessAddress: React.Dispatch<React.SetStateAction<string>>;
-  businessContact: string;
-  setBusinessContact: React.Dispatch<React.SetStateAction<string>>;
-  businessEmail: string;
-  setBusinessEmail: React.Dispatch<React.SetStateAction<string>>;
-  clientContact: string;
-  setClientContact: React.Dispatch<React.SetStateAction<string>>;
-  clientName: string;
-  setClientName: React.Dispatch<React.SetStateAction<string>>;
-  clientAddress: string;
-  setClientAddress: React.Dispatch<React.SetStateAction<string>>;
-  additionalInfo: string;
-  setAdditionalInfo: React.Dispatch<React.SetStateAction<string>>;
-  invoiceTo: string;
-  setInvoiceTo: React.Dispatch<React.SetStateAction<string>>;
-  signature: string;
-  setSignature: React.Dispatch<React.SetStateAction<string>>;
-  invoiceDate: string;
-  setInvoiceDate: React.Dispatch<React.SetStateAction<string>>;
-  description: string;
-  setDescription: React.Dispatch<React.SetStateAction<string>>;
+  name: any;
+  setName: React.Dispatch<React.SetStateAction<any>>;
+  businessName: any;
+  setBusinessName: React.Dispatch<React.SetStateAction<any>>;
+  businessSlogan: any;
+  setBusinessSlogan: React.Dispatch<React.SetStateAction<any>>;
+  businessAddress: any;
+  setBusinessAddress: React.Dispatch<React.SetStateAction<any>>;
+  businessContact: any;
+  setBusinessContact: React.Dispatch<React.SetStateAction<any>>;
+  businessEmail: any;
+  setBusinessEmail: React.Dispatch<React.SetStateAction<any>>;
+  clientContact: any;
+  setClientContact: React.Dispatch<React.SetStateAction<any>>;
+  clientName: any;
+  setClientName: React.Dispatch<React.SetStateAction<any>>;
+  clientAddress: any;
+  setClientAddress: React.Dispatch<React.SetStateAction<any>>;
+  additionalInfo: any;
+  setAdditionalInfo: React.Dispatch<React.SetStateAction<any>>;
+  invoiceTo: any;
+  setInvoiceTo: React.Dispatch<React.SetStateAction<any>>;
+  signature: any;
+  setSignature: React.Dispatch<React.SetStateAction<any>>;
+  invoiceDate: any;
+  setInvoiceDate: React.Dispatch<React.SetStateAction<any>>;
+  description: any;
+  setDescription: React.Dispatch<React.SetStateAction<any>>;
   quantity: any;
   setQuantity: React.Dispatch<React.SetStateAction<any>>;
   price: any;
   setPrice: React.Dispatch<React.SetStateAction<any>>;
   amount: any;
   setAmount: React.Dispatch<React.SetStateAction<any>>;
-  amountPaid: string;
-  setAmountPaid: React.Dispatch<React.SetStateAction<string>>;
-  cashOrChequeNo: string;
-  setCashOrChequeNo: React.Dispatch<React.SetStateAction<string>>;
+  amountPaid: any;
+  setAmountPaid: React.Dispatch<React.SetStateAction<any>>;
+  cashOrChequeNo: any;
+  setCashOrChequeNo: React.Dispatch<React.SetStateAction<any>>;
   list: any;
   setList: any;
   total: number;
@@ -82,10 +82,10 @@ type StateContextType = {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-  handleSubmit: () => void;
-  calculateAmount: () => void;
-  editRow: () => void;
-  deleteRow: () => void;
+  handleSubmit: (e: any) => void;
+  calculateAmount: (amount: any) => void;
+  editRow: (id: any) => void;
+  deleteRow: (id: any) => void;
 };
 // React.Dispatch<React.SetStateAction<boolean>>
 // React.Dispatch<React.SetStateAction<never[]>>
@@ -113,12 +113,12 @@ export const StateContextProvider = ({ children }: Props) => {
   const [signature, setSignature] = useState('');
   const [invoiceDate, setInvoiceDate] = useState(formattedDate);
   const [description, setDescription] = useState('');
-  const [quantity, setQuantity] = useState('');
-  const [price, setPrice] = useState('');
+  const [quantity, setQuantity] = useState<any>('');
+  const [price, setPrice] = useState<any>('');
   const [amount, setAmount] = useState('');
   const [amountPaid, setAmountPaid] = useState('');
   const [cashOrChequeNo, setCashOrChequeNo] = useState('');
-  const [list, setList] = useState([]);
+  const [list, setList] = useState<any>([]);
   const [total, setTotal] = useState(0);
   const [vat, setVat] = useState(0);
   const [sumTotal, setSumTotal] = useState(0);
@@ -147,7 +147,7 @@ export const StateContextProvider = ({ children }: Props) => {
     if (!description || !quantity || !price) {
       toast.error('Please fill in all inputs');
     } else {
-      const newItems = {
+      const newItems: any = {
         id: uuidv4(),
         description,
         quantity,
