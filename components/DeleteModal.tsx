@@ -7,7 +7,7 @@ type Props = {
 };
 
 export default function DeleteModal({ id }: Props) {
-  const { setShowModal, deleteRow } = useStateContext();
+  const { setShowModal, deleteRow }: any = useStateContext();
 
   return (
     <>

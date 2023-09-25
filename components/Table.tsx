@@ -3,7 +3,7 @@ import React from 'react';
 import { useStateContext } from '@/context/stateContext';
 
 const Table = () => {
-  const { list, amountPaid, total, vat, sumTotal, balance } = useStateContext();
+  const { list, amountPaid, total, vat, sumTotal, balance }: any = useStateContext();
   return (
     <div className='mt-4'>
       <table width='100%' className='mb-10 text-center'>

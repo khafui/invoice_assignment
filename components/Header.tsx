@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React from 'react';
 
 const Header = () => {
-  const { selectedImage, businessName, businessSlogan } = useStateContext();
+  const { selectedImage, businessName, businessSlogan }: any = useStateContext();
   return (
     <div>
       <div className='flex w-full items-center justify-between gap-x-4 mb-0.5'>

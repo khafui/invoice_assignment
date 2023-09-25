@@ -24,7 +24,7 @@ export default function TableForm() {
     setShowModal,
     handleSubmit,
     editRow,
-  } = useStateContext();
+  }: any = useStateContext();
 
   return (
     <>

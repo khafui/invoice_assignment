@@ -4,7 +4,7 @@ import React from 'react';
 import { useStateContext } from '@/context/stateContext';
 
 const ClientDetails = () => {
-  const { invoiceTo, clientAddress, clientContact, invoiceDate } =
+  const { invoiceTo, clientAddress, clientContact, invoiceDate }: any =
     useStateContext();
   const dateString = invoiceDate;
   // const dateString = '2023-09-25';

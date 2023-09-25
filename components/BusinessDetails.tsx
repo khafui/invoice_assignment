@@ -2,7 +2,7 @@
 import React from 'react';
 import { useStateContext } from '@/context/stateContext';
 const BusinessDetails = () => {
-  const { businessAddress, businessContact, businessEmail } = useStateContext();
+  const { businessAddress, businessContact, businessEmail }: any = useStateContext();
 
   return (
     <div className='flex w-full items-center justify-between gap-4 mt-2'>
