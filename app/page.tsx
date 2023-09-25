@@ -11,6 +11,7 @@ import { useStateContext } from '@/context/stateContext';
 import { useRef } from 'react';
 
 export default function Home() {
+  
   const {
     // componentRef,
     businessName,
@@ -40,7 +41,7 @@ export default function Home() {
     setAdditionalInfo,
     signature,
     setSignature,
-  } = useStateContext();
+  }: any = useStateContext();
 
   const componentRef = useRef<any>();
 
