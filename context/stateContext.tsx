@@ -77,7 +77,7 @@ type StateContextType = {
   width: number;
   selectedImage: any;
   setSelectedImage: any;
-  componentRef: HTMLDivElement;
+  componentRef: any;
   isEditing: boolean;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   showModal: boolean;
