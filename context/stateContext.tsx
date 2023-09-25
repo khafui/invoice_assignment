@@ -1,3 +1,5 @@
+'use client';
+
 import React, {
   createContext,
   useEffect,
@@ -9,63 +11,128 @@ import toast from 'react-hot-toast';
 import { v4 as uuidv4 } from 'uuid';
 import collect from 'collect.js';
 
-const StateContext = createContext<Context>();
+// interface MyContextType {
+//   // Define your context type here
+//   name: any;
+//   businessName: any;
+//   businessSlogan: any;
+//   businessAddress: any;
+// }
 
-interface Props {
+// const StateContext = createContext<MyContextType | undefined>(undefined);
+
+type Props = {
   children: React.ReactNode;
-}
+};
+
+type StateContextType = {
+  name: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  businessName: string;
+  setBusinessName: React.Dispatch<React.SetStateAction<string>>;
+  businessSlogan: string;
+  setBusinessSlogan: React.Dispatch<React.SetStateAction<string>>;
+  businessAddress: string;
+  setBusinessAddress: React.Dispatch<React.SetStateAction<string>>;
+  businessContact: string;
+  setBusinessContact: React.Dispatch<React.SetStateAction<string>>;
+  businessEmail: string;
+  setBusinessEmail: React.Dispatch<React.SetStateAction<string>>;
+  clientContact: string;
+  setClientContact: React.Dispatch<React.SetStateAction<string>>;
+  clientName: string;
+  setClientName: React.Dispatch<React.SetStateAction<string>>;
+  clientAddress: string;
+  setClientAddress: React.Dispatch<React.SetStateAction<string>>;
+  additionalInfo: string;
+  setAdditionalInfo: React.Dispatch<React.SetStateAction<string>>;
+  invoiceTo: string;
+  setInvoiceTo: React.Dispatch<React.SetStateAction<string>>;
+  signature: string;
+  setSignature: React.Dispatch<React.SetStateAction<string>>;
+  invoiceDate: string;
+  setInvoiceDate: React.Dispatch<React.SetStateAction<string>>;
+  description: string;
+  setDescription: React.Dispatch<React.SetStateAction<string>>;
+  quantity: any;
+  setQuantity: React.Dispatch<React.SetStateAction<any>>;
+  price: any;
+  setPrice: React.Dispatch<React.SetStateAction<any>>;
+  amount: any;
+  setAmount: React.Dispatch<React.SetStateAction<any>>;
+  amountPaid: string;
+  setAmountPaid: React.Dispatch<React.SetStateAction<string>>;
+  cashOrChequeNo: string;
+  setCashOrChequeNo: React.Dispatch<React.SetStateAction<string>>;
+  list: any;
+  setList: any;
+  total: number;
+  setTotal: React.Dispatch<React.SetStateAction<number>>;
+  vat: number;
+  setVat: React.Dispatch<React.SetStateAction<number>>;
+  sumTotal: number;
+  setSumTotal: React.Dispatch<React.SetStateAction<number>>;
+  balance: number;
+  setBalance: React.Dispatch<React.SetStateAction<number>>;
+  width: number;
+  selectedImage: any;
+  setSelectedImage: any;
+  componentRef: HTMLDivElement;
+  isEditing: boolean;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  showModal: boolean;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  handleSubmit: () => void;
+  calculateAmount: () => void;
+  editRow: () => void;
+  deleteRow: () => void;
+};
+// React.Dispatch<React.SetStateAction<boolean>>
+// React.Dispatch<React.SetStateAction<never[]>>
+
+const StateContext = createContext<StateContextType | null>(null);
+
+const currentDate = new Date();
+const year = currentDate.getFullYear();
+const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+const day = String(currentDate.getDate()).padStart(2, '0');
+const formattedDate = `${year}-${month}-${day}`;
 
 export const StateContextProvider = ({ children }: Props) => {
-  const currentDate = new Date();
-  const year = currentDate.getFullYear();
-  const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-  const day = String(currentDate.getDate()).padStart(2, '0');
-
-  const formattedDate = `${year}-${month}-${day}`;
-
-  const [name, setName] = useState<any>('');
-  const [businessName, setBusinessName] = useState<any>('');
-  const [businessSlogan, setBusinessSlogan] = useState<any>('');
-  const [businessAddress, setBusinessAddress] = useState<any>('');
-  const [businessContact, setBusinessContact] = useState<any>('');
-  const [businessEmail, setBusinessEmail] = useState<any>('');
-  const [email, setEmail] = useState<any>('');
-  const [clientContact, setClientContact] = useState<any>('');
-  const [bankName, setBankName] = useState<any>('');
-  const [bankAccount, setBankAccount] = useState<any>('');
-  const [website, setWebsite] = useState<any>('');
-  const [clientName, setClientName] = useState<any>('');
-  const [clientAddress, setClientAddress] = useState<any>('');
-  const [additionalInfo, setAdditionalInfo] = useState<any>('');
-  const [invoiceTo, setInvoiceTo] = useState<any>('');
-  const [signature, setSignature] = useState<any>('');
-  const [invoiceDate, setInvoiceDate] = useState<any>(formattedDate);
-  const [dueDate, setDueDate] = useState<any>('');
-  const [notes, setNotes] = useState<any>('');
-  const [description, setDescription] = useState<any>('');
-  const [quantity, setQuantity] = useState<any>('');
-  const [price, setPrice] = useState<any>('');
-  const [amount, setAmount] = useState<any>('');
-  const [amountPaid, setAmountPaid] = useState<any>('');
-  const [cashOrChequeNo, setCashOrChequeNo] = useState<any>('');
-  const [list, setList] = useState<any>([]);
-  const [total, setTotal] = useState<any>(0);
-  const [vat, setVat] = useState<any>(0);
-  const [sumTotal, setSumTotal] = useState<any>(0);
-  const [balance, setBalance] = useState<any>(0);
-  const [width] = useState<any>(641);
-  const [selectedImage, setSelectedImage] = useState<any>();
-  const [selectedImageLink, setSelectedImageLink] = useState<any>();
-  // const [invoices, setInvoices] = useState([]);
-  const [isEditing, setIsEditing] = useState<any>(false);
-  const [showModal, setShowModal] = useState<any>(false);
-  const [showLogoutModal, setShowLogoutModal] = useState<any>(false);
+  const [name, setName] = useState('');
+  const [businessName, setBusinessName] = useState('');
+  const [businessSlogan, setBusinessSlogan] = useState('');
+  const [businessAddress, setBusinessAddress] = useState('');
+  const [businessContact, setBusinessContact] = useState('');
+  const [businessEmail, setBusinessEmail] = useState('');
+  const [clientContact, setClientContact] = useState('');
+  const [clientName, setClientName] = useState('');
+  const [clientAddress, setClientAddress] = useState('');
+  const [additionalInfo, setAdditionalInfo] = useState('');
+  const [invoiceTo, setInvoiceTo] = useState('');
+  const [signature, setSignature] = useState('');
+  const [invoiceDate, setInvoiceDate] = useState(formattedDate);
+  const [description, setDescription] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [price, setPrice] = useState('');
+  const [amount, setAmount] = useState('');
+  const [amountPaid, setAmountPaid] = useState('');
+  const [cashOrChequeNo, setCashOrChequeNo] = useState('');
+  const [list, setList] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [vat, setVat] = useState(0);
+  const [sumTotal, setSumTotal] = useState(0);
+  const [balance, setBalance] = useState(0);
+  const [width] = useState(641);
+  const [selectedImage, setSelectedImage] = useState();
+  const [isEditing, setIsEditing] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const componentRef = useRef();
 
-  const handlePrint = () => {
-    window.print();
-  };
+  // const handlePrint = () => {
+  //   window.print();
+  // };
 
   useEffect(() => {
     if (window.innerWidth < width) {
@@ -98,11 +165,11 @@ export const StateContextProvider = ({ children }: Props) => {
   };
 
   // This function will be triggered when the file field change
-  const imageChange = (e: any) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setSelectedImage(e.target.files[0]);
-    }
-  };
+  // const imageChange = (e: any) => {
+  //   if (e.target.files && e.target.files.length > 0) {
+  //     setSelectedImage(e.target.files[0]);
+  //   }
+  // };
 
   // Calculate items amount function
   useEffect(() => {
@@ -152,16 +219,8 @@ export const StateContextProvider = ({ children }: Props) => {
         setName,
         businessAddress,
         setBusinessAddress,
-        email,
-        setEmail,
         clientContact,
         setClientContact,
-        bankName,
-        setBankName,
-        bankAccount,
-        setBankAccount,
-        website,
-        setWebsite,
         clientName,
         setClientName,
         clientAddress,
@@ -170,10 +229,6 @@ export const StateContextProvider = ({ children }: Props) => {
         setInvoiceTo,
         invoiceDate,
         setInvoiceDate,
-        dueDate,
-        setDueDate,
-        notes,
-        setNotes,
         description,
         setDescription,
         quantity,
@@ -194,7 +249,6 @@ export const StateContextProvider = ({ children }: Props) => {
         setBalance,
         width,
         componentRef,
-        handlePrint,
         isEditing,
         setIsEditing,
         showModal,
@@ -202,8 +256,6 @@ export const StateContextProvider = ({ children }: Props) => {
         handleSubmit,
         editRow,
         deleteRow,
-        showLogoutModal,
-        setShowLogoutModal,
         amountPaid,
         setAmountPaid,
         cashOrChequeNo,
@@ -215,14 +267,13 @@ export const StateContextProvider = ({ children }: Props) => {
         businessContact,
         setBusinessContact,
         businessEmail,
-        imageChange,
         setBusinessEmail,
         setSelectedImage,
         selectedImage,
-        selectedImageLink,
-        setSelectedImageLink,
-        additionalInfo, setAdditionalInfo,
-        signature, setSignature,
+        additionalInfo,
+        setAdditionalInfo,
+        signature,
+        setSignature,
       }}
     >
       {children}
@@ -230,6 +281,10 @@ export const StateContextProvider = ({ children }: Props) => {
   );
 };
 export const useStateContext = () => {
+  const context = useContext(StateContext);
+  if (!context) {
+    throw new Error('useStateContext must be used within a Provider');
+  }
   return useContext(StateContext);
 };
 

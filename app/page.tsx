@@ -34,7 +34,6 @@ export default function Home() {
     setSelectedImage,
     cashOrChequeNo,
     additionalInfo,
-    imageChange,
     name,
     setName,
     setAdditionalInfo,
