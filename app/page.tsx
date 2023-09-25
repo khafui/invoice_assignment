@@ -8,10 +8,11 @@ import ReactToPrint from 'react-to-print';
 import Image from 'next/image';
 import TableForm from '@/components/TableForm';
 import { useStateContext } from '@/context/stateContext';
+import { useRef } from 'react';
 
 export default function Home() {
   const {
-    componentRef,
+    // componentRef,
     businessName,
     setBusinessName,
     businessSlogan,
@@ -40,6 +41,8 @@ export default function Home() {
     signature,
     setSignature,
   } = useStateContext();
+
+  const componentRef = useRef<any>();
 
   return (
     <main

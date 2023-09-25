@@ -77,7 +77,7 @@ type StateContextType = {
   width: number;
   selectedImage: any;
   setSelectedImage: any;
-  componentRef: any;
+  // componentRef: any;
   isEditing: boolean;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   showModal: boolean;
@@ -128,7 +128,7 @@ export const StateContextProvider = ({ children }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  const componentRef = useRef();
+  // const componentRef = useRef();
 
   // const handlePrint = () => {
   //   window.print();
@@ -248,7 +248,7 @@ export const StateContextProvider = ({ children }: Props) => {
         balance,
         setBalance,
         width,
-        componentRef,
+        // componentRef,
         isEditing,
         setIsEditing,
         showModal,
