@@ -113,16 +113,16 @@ export const StateContextProvider = ({ children }: Props) => {
   const [signature, setSignature] = useState('');
   const [invoiceDate, setInvoiceDate] = useState(formattedDate);
   const [description, setDescription] = useState('');
-  const [quantity, setQuantity] = useState<any>('');
-  const [price, setPrice] = useState<any>('');
-  const [amount, setAmount] = useState('');
-  const [amountPaid, setAmountPaid] = useState('');
+  const [quantity, setQuantity] = useState<any>(0);
+  const [price, setPrice] = useState<any>(0);
+  const [amount, setAmount] = useState<any>(0);
+  const [amountPaid, setAmountPaid] = useState<any>(0);
   const [cashOrChequeNo, setCashOrChequeNo] = useState('');
   const [list, setList] = useState<any>([]);
-  const [total, setTotal] = useState(0);
-  const [vat, setVat] = useState(0);
-  const [sumTotal, setSumTotal] = useState(0);
-  const [balance, setBalance] = useState(0);
+  const [total, setTotal] = useState<any>(0);
+  const [vat, setVat] = useState<any>(0);
+  const [sumTotal, setSumTotal] = useState<any>(0);
+  const [balance, setBalance] = useState<any>(0);
   const [width] = useState(641);
   const [selectedImage, setSelectedImage] = useState();
   const [isEditing, setIsEditing] = useState(false);
@@ -140,6 +140,10 @@ export const StateContextProvider = ({ children }: Props) => {
     }
   }, [width]);
 
+  const calculateAmount = (amount: any) => {
+    setAmount(quantity * price);
+  };
+
   // Submit form function
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -153,11 +157,12 @@ export const StateContextProvider = ({ children }: Props) => {
         quantity,
         price,
         amount,
+        // amount: calculateAmount(quantity, price),
       };
       setDescription('');
-      setQuantity('');
-      setPrice('');
-      setAmount('');
+      setQuantity(0);
+      setPrice(0);
+      setAmount(0);
       setList([...list, newItems]);
       setIsEditing(false);
       // console.log(list);
@@ -173,9 +178,9 @@ export const StateContextProvider = ({ children }: Props) => {
 
   // Calculate items amount function
   useEffect(() => {
-    const calculateAmount = (amount: any) => {
-      setAmount(quantity * price);
-    };
+    // const calculateAmount = (amount: any) => {
+    //   setAmount(quantity * price);
+    // };
 
     calculateAmount(amount);
   }, [amount, price, quantity, setAmount]);
@@ -249,6 +254,7 @@ export const StateContextProvider = ({ children }: Props) => {
         setBalance,
         width,
         // componentRef,
+        calculateAmount,
         isEditing,
         setIsEditing,
         showModal,
