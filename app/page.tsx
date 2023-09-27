@@ -31,8 +31,8 @@ const Home = async () => {
           <div className="invoice__header-logo">
             <h3>Invoices</h3>
             <p>
-              There {invoices.length > 1 ? 'are' : 'is a'} total{' '}
-              {invoices.length} invoice{invoices.length > 1 && 's'}
+              There {invoices?.length > 1 ? 'are' : 'is a'} total{' '}
+              {invoices?.length} invoice{invoices?.length > 1 && 's'}
             </p>
           </div>
 
@@ -52,30 +52,30 @@ const Home = async () => {
               <div className="invoice__item">
                 <div>
                   <h5 className="invoice__id">
-                    {invoice._id.substr(0, 6).toUpperCase()}
+                    {invoice?._id.substr(0, 6).toUpperCase()}
                   </h5>
                 </div>
 
                 <div>
-                  <h6 className="invoice__client">{invoice.invoiceTo}</h6>
+                  <h6 className="invoice__client">{invoice?.invoiceTo}</h6>
                 </div>
 
                 <div>
                   <p className="invoice__created">
-                    {new Date(invoice.invoiceDate).toDateString()}
+                    {new Date(invoice?.invoiceDate).toDateString()}
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="invoice__total">GHS {invoice.sumTotal}</h3>
+                  <h3 className="invoice__total">GHS {invoice?.sumTotal}</h3>
                 </div>
                 <div className="flex gap-x-2">
                   <div className="ml-2">
-                    <Removebtn id={invoice._id} />
+                    <Removebtn id={invoice?._id} />
                   </div>
                   <div>
                     <Link
-                      href={`/view-invoice/${invoice._id}`}
+                      href={`/view-invoice/${invoice?._id}`}
                       className="paid__status "
                     >
                       View
