@@ -322,6 +322,7 @@ export const StateContextProvider = ({ children }: Props) => {
           vat,
           sumTotal,
           balance,
+          amountPaid,
           img: url,
           // title: topicDetails.title,
           // description: topicDetails.description,
