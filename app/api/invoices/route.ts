@@ -22,6 +22,7 @@ export async function POST(request: NextRequest) {
     vat,
     sumTotal,
     balance,
+    amountPaid,
     img,
   } = await request.json();
   await connectMongoDB();
@@ -44,6 +45,7 @@ export async function POST(request: NextRequest) {
     vat,
     sumTotal,
     balance,
+    amountPaid,
     img,
   });
   return NextResponse.json({ message: 'Invoice Created' }, { status: 201 });

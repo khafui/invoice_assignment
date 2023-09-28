@@ -28,6 +28,7 @@ const invoiceSchema = new Schema(
     vat: String,
     sumTotal: String,
     balance: String,
+    amountPaid: String,
     img: String,
   },
   {

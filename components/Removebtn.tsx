@@ -23,7 +23,7 @@ const Removebtn = ({ id }: Props) => {
 
   const deleteRecord = async (e: any) => {
     e.preventDefault();
-    const res = await fetch(`http://localhost:3000/api/invoices?id=${id}`, {
+    const res = await fetch(`${baseUrl}/api/invoices?id=${id}`, {
       method: 'DELETE',
     });
 
