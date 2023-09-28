@@ -10,6 +10,8 @@ import React, {
 import toast from 'react-hot-toast';
 import { v4 as uuidv4 } from 'uuid';
 import collect from 'collect.js';
+import { useRouter } from 'next/navigation';
+import { getBaseUrl } from '@/utils/baseUrl';
 
 // interface MyContextType {
 //   // Define your context type here
@@ -86,6 +88,7 @@ type StateContextType = {
   calculateAmount: (amount: any) => void;
   editRow: (id: any) => void;
   deleteRow: (id: any) => void;
+  addNewInvoice: () => void;
 };
 // React.Dispatch<React.SetStateAction<boolean>>
 // React.Dispatch<React.SetStateAction<never[]>>
@@ -127,6 +130,7 @@ export const StateContextProvider = ({ children }: Props) => {
   const [selectedImage, setSelectedImage] = useState();
   const [isEditing, setIsEditing] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const router = useRouter();
 
   // const componentRef = useRef();
 
@@ -217,6 +221,151 @@ export const StateContextProvider = ({ children }: Props) => {
     toast.success('Item deleted successfully');
   };
 
+  const upload = async () => {
+    if (selectedImage) {
+      const data = new FormData();
+      const myHeaders = new Headers();
+      myHeaders.append('Content-Type', 'multipart/form-data');
+      data.append('upload_preset', 'restaurant');
+      data.append('file', selectedImage[0]);
+
+      const res = await fetch(
+        'https://api.cloudinary.com/v1_1/khafui/image/upload',
+        {
+          method: 'POST',
+          // headers: myHeaders,
+          body: data,
+        }
+      );
+
+      const resData = await res.json();
+      // console.log('url', resData.url);
+
+      return resData.url;
+    } else return '';
+  };
+
+  const addNewInvoice = async () => {
+    const url = await upload();
+
+    // console.log(
+    //   'invoice data',
+    //   JSON.stringify({
+    //     businessName,
+    //     businessSlogan,
+    //     businessAddress,
+    //     businessContact,
+    //     businessEmail,
+    //     invoiceTo,
+    //     invoiceDate,
+    //     clientContact,
+    //     clientAddress,
+    //     cashOrChequeNo,
+    //     additionalInfo,
+    //     name,
+    //     signature,
+    //     list,
+    //     total,
+    //     vat,
+    //     sumTotal,
+    //     balance,
+    //     img: url,
+    //   })
+    // );
+
+    // const baseUrl = process.env.APP_URI
+    const baseUrl = getBaseUrl();
+
+    if (!baseUrl) {
+      console.error('Failed to connect base url');
+      console.log(`${baseUrl}/api/invoices`);
+
+      return;
+    }
+
+    // console.log('image', selectedImage ? selectedImage[0]: 'no image');
+
+    if (!invoiceTo || !businessName || !businessContact) {
+      toast.error('All fields are required');
+      return;
+    }
+
+    //   const baseUrl = process.env.APP_URI!
+
+    // if(!baseUrl){
+    //      toast.error('Failed to fetch invoices from base url');
+    //     return;
+    //   }
+
+    try {
+      const res = await fetch(`${baseUrl}/api/invoices`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          businessName,
+          businessSlogan,
+          businessAddress,
+          businessContact,
+          businessEmail,
+          invoiceTo,
+          invoiceDate,
+          clientContact,
+          clientAddress,
+          cashOrChequeNo,
+          additionalInfo,
+          name,
+          signature,
+          list,
+          total,
+          vat,
+          sumTotal,
+          balance,
+          img: url,
+          // title: topicDetails.title,
+          // description: topicDetails.description,
+        }),
+      });
+
+      //   console.log(
+      //   'invoice data',
+      //   JSON.stringify({
+      //     businessName,
+      //     businessSlogan,
+      //     businessAddress,
+      //     businessContact,
+      //     businessEmail,
+      //     invoiceTo,
+      //     invoiceDate,
+      //     clientContact,
+      //     clientAddress,
+      //     cashOrChequeNo,
+      //     additionalInfo,
+      //     name,
+      //     signature,
+      //     list,
+      //     total,
+      //     vat,
+      //     sumTotal,
+      //     balance,
+      //     img:url,
+      //   })
+      // );
+
+      if (res.ok) {
+        router.refresh();
+        router.push('/');
+        toast.success('Invoice created successfully');
+      } else {
+        toast.error('Failed to create an invoice');
+        throw new Error('Failed to create an invoice');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <StateContext.Provider
       value={{
@@ -280,6 +429,7 @@ export const StateContextProvider = ({ children }: Props) => {
         setAdditionalInfo,
         signature,
         setSignature,
+        addNewInvoice,
       }}
     >
       {children}

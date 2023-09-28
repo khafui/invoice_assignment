@@ -18,7 +18,7 @@ const ClientDetails = () => {
       <div className='flex-1'>
         <div className='flex border-t border-x border-[#0048a7] h-8'>
           <div className='bg-[#0048a7] w-[100px] px-3 text-white font-bold uppercase text-[9px]'>
-            <p>Invoice To</p>
+            <p className='text-white'>Invoice To</p>
           </div>
           <div className='px-2'>
             <p>{invoiceTo !== '' && invoiceTo}</p>
@@ -26,7 +26,7 @@ const ClientDetails = () => {
         </div>
         <div className='flex border-t border-x border-[#0048a7] h-8'>
           <div className='bg-[#0048a7] w-[100px] px-3 text-white font-bold uppercase text-[9px]'>
-            <p>Tel</p>
+            <p className='text-white'>Tel</p>
           </div>
           <div className='px-2'>
             <p>{clientContact !== '' && clientContact}</p>
@@ -34,7 +34,7 @@ const ClientDetails = () => {
         </div>
         <div className='flex border border-[#0048a7] h-8'>
           <div className='bg-[#0048a7] w-[100px] px-3 text-white font-bold uppercase text-[9px]'>
-            <p>Address</p>
+            <p className='text-white'>Address</p>
           </div>
           <div className='px-2'>
             <p>{clientAddress !== '' && clientAddress}</p>
