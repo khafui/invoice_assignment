@@ -42,6 +42,7 @@ const ViewPage = async ({ params }: any) => {
       >
         Home
       </Link>
+      
       <div className="p-5">
         {/* Header */}
         <div>
