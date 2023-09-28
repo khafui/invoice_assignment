@@ -25,7 +25,7 @@ const getInvoices = async () => {
 
 const Home = async () => {
   // const { invoices } = await getInvoices();
-  return <p>Hello</p>;
+  return <p>Helloi</p>;
 
   // return (
   //   <main>
