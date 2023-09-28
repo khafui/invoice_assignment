@@ -11,7 +11,7 @@ const getInvoices = async () => {
   }
 
   try {    
-    const response = await fetch(`${baseUrl}/api/invoices`, {
+    const response = await fetch(`http://localhost:3000/api/invoices`, {
       cache: 'no-store',
     });
     

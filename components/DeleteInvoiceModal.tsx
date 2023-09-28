@@ -11,15 +11,15 @@ type Props = {
 
 export default function DeleteInvoiceModal({ id }: Props) {
   const router = useRouter();
-  const baseUrl = getBaseUrl();
   const { setShowDModal }: any = useStateContext();
+  const baseUrl = getBaseUrl();
 
    if (!baseUrl) {
      console.log('Error connecting to base url ');
    }
 
   const deleteRecord = async (id: string) => {
-    const res = await fetch(`${baseUrl}/api/invoices?id=${id}`, {
+    const res = await fetch(`http://localhost:3000/api/invoices?id=${id}`, {
       method: 'DELETE',
     });
 
