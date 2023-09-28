@@ -191,11 +191,11 @@ export const StateContextProvider = ({ children }: Props) => {
 
   // Use collect.js to calculate the total amount of items in the table. This is a much better function than the commented one above.
   const calculateTotal = () => {
-    const allItems = list.map((item: any) => item.price);
+    const allItems = list.map((item: any) => item.amount);
 
     setTotal(collect(allItems).sum());
     setVat(((3 / 100) * total).toFixed(2));
-    setSumTotal(total + vat);
+    setSumTotal(parseFloat(total) + parseFloat(vat));
     setBalance((sumTotal - amountPaid).toFixed(2));
   };
 
