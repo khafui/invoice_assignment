@@ -1,13 +1,14 @@
 import Image from 'next/image';
 import React from 'react';
 import { getBaseUrl } from '@/utils/baseUrl';
+import Link from 'next/link';
 
 const getInvoiceData = async (id: any) => {
   const baseUrl = getBaseUrl();
 
-   if (!baseUrl) {
-     console.log('Error connecting to base url ');
-   }
+  if (!baseUrl) {
+    console.log('Error connecting to base url ');
+  }
 
   try {
     const response = await fetch(`${baseUrl}/api/invoices/${id}`, {
@@ -35,6 +36,12 @@ const ViewPage = async ({ params }: any) => {
 
   return (
     <div className="p-5 lg:max-w-4xl mx-auto top-0 sticky">
+      <Link
+        className="ml-4 p-2 bg-gray-400 rounded-md text-gray-700 hover:text-green-800"
+        href={'/'}
+      >
+        Home
+      </Link>
       <div className="p-5">
         {/* Header */}
         <div>
