@@ -1,14 +1,14 @@
 // 'use client';
+import { getBaseUrl } from "@/utils/baseUrl";
 import Link from "next/link"
 import React from 'react'
 
 const getInvoices = async () => {
-  const baseUrl = process.env.APP_URI!
+  const baseUrl = getBaseUrl();
 
-  if(!baseUrl){
-       console.error('Failed to fetch topics');
-      return;
-    }
+  if (!baseUrl) {
+    console.log('Error connecting to base url ');
+  }
 
   try {    
     const response = await fetch(`${baseUrl}/api/invoices`, {
@@ -16,7 +16,7 @@ const getInvoices = async () => {
     });
     
     if (!response.ok) {
-      throw new Error('Failed to fetch topics');
+      throw new Error('Failed to fetch invoices');
     }
 
     return response.json();

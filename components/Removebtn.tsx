@@ -17,6 +17,10 @@ const Removebtn = ({ id }: Props) => {
   const router = useRouter();
   const baseUrl = getBaseUrl();
 
+  if (!baseUrl) {
+    console.log('Error connecting to base url ');
+  }
+
   const deleteRecord = async (e: any) => {
     e.preventDefault();
     const res = await fetch(`${baseUrl}/api/invoices?id=${id}`, {

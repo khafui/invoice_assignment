@@ -5,6 +5,10 @@ import { getBaseUrl } from '@/utils/baseUrl';
 const getInvoiceData = async (id: any) => {
   const baseUrl = getBaseUrl();
 
+   if (!baseUrl) {
+     console.log('Error connecting to base url ');
+   }
+
   try {
     const response = await fetch(`${baseUrl}/api/invoices/${id}`, {
       cache: 'no-store',

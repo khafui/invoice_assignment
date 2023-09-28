@@ -5,6 +5,9 @@ import Removebtn from '@/components/Removebtn';
 
 const getInvoices = async () => {
   const baseUrl = getBaseUrl();
+  if (!baseUrl) {
+    console.log('Error connecting to base url ');
+  }
   try {
     const response = await fetch(`${baseUrl}/api/invoices`, {
       cache: 'no-store',
