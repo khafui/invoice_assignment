@@ -24,75 +24,74 @@ const getInvoices = async () => {
 };
 
 const Home = async () => {
-  // const { invoices } = await getInvoices();
-  return <p>Helloi</p>;
+  const { invoices } = await getInvoices();
 
-  // return (
-  //   <main>
-  //     <Sidebar />
-  //     <section className="main__container">
-  //       <div className="invoice__header">
-  //         <div className="invoice__header-logo">
-  //           <h3>Invoices</h3>
-  //           <p>
-  //             There {invoices?.length > 1 ? 'are' : 'is a'} total{' '}
-  //             {invoices?.length} invoice{invoices?.length > 1 && 's'}
-  //           </p>
-  //         </div>
+  return (
+    <main>
+      <Sidebar />
+      <section className="main__container">
+        <div className="invoice__header">
+          <div className="invoice__header-logo">
+            <h3>Invoices</h3>
+            <p>
+              There {invoices?.length > 1 ? 'are' : 'is a'} total{' '}
+              {invoices?.length} invoice{invoices?.length > 1 && 's'}
+            </p>
+          </div>
 
-  //         <Link
-  //           href="/add-new"
-  //           className="bg-[#0048a7]  text-white font-bold py-2 px-8 rounded hover:bg-blue-600 hover:text-white transition-all duration-150 hover:ring-4 hover:ring-blue-400t"
-  //           // onClick={() => {}}
-  //         >
-  //           Add New
-  //         </Link>
-  //       </div>
-  //       {/* <InvoiceRow /> */}
-  //       <div className="invoice__container">
-  //         {/* ======= invoice item =========== */}
-  //         {invoices?.map((invoice: any) => (
-  //           <Link href={`/invoices/${invoice._id}`} passHref key={invoice._id}>
-  //             <div className="invoice__item">
-  //               <div>
-  //                 <h5 className="invoice__id">
-  //                   {invoice?._id.substr(0, 6).toUpperCase()}
-  //                 </h5>
-  //               </div>
+          <Link
+            href="/add-new"
+            className="bg-[#0048a7]  text-white font-bold py-2 px-8 rounded hover:bg-blue-600 hover:text-white transition-all duration-150 hover:ring-4 hover:ring-blue-400t"
+            // onClick={() => {}}
+          >
+            Add New
+          </Link>
+        </div>
+        {/* <InvoiceRow /> */}
+        <div className="invoice__container">
+          {/* ======= invoice item =========== */}
+          {invoices?.map((invoice: any) => (
+            <Link href={`/invoices/${invoice._id}`} passHref key={invoice._id}>
+              <div className="invoice__item">
+                <div>
+                  <h5 className="invoice__id">
+                    {invoice?._id.substr(0, 6).toUpperCase()}
+                  </h5>
+                </div>
 
-  //               <div>
-  //                 <h6 className="invoice__client">{invoice?.invoiceTo}</h6>
-  //               </div>
+                <div>
+                  <h6 className="invoice__client">{invoice?.invoiceTo}</h6>
+                </div>
 
-  //               <div>
-  //                 <p className="invoice__created">
-  //                   {new Date(invoice?.invoiceDate).toDateString()}
-  //                 </p>
-  //               </div>
+                <div>
+                  <p className="invoice__created">
+                    {new Date(invoice?.invoiceDate).toDateString()}
+                  </p>
+                </div>
 
-  //               <div>
-  //                 <h3 className="invoice__total">GHS {invoice?.sumTotal}</h3>
-  //               </div>
-  //               <div className="flex gap-x-2">
-  //                 <div className="ml-2">
-  //                   <Removebtn id={invoice?._id} />
-  //                 </div>
-  //                 <div>
-  //                   <Link
-  //                     href={`/view-invoice/${invoice?._id}`}
-  //                     className="paid__status "
-  //                   >
-  //                     View
-  //                   </Link>
-  //                 </div>
-  //               </div>
-  //             </div>
-  //           </Link>
-  //         ))}
-  //       </div>
-  //     </section>
-  //   </main>
-  // );
+                <div>
+                  <h3 className="invoice__total">GHS {invoice?.sumTotal}</h3>
+                </div>
+                <div className="flex gap-x-2">
+                  <div className="ml-2">
+                    <Removebtn id={invoice?._id} />
+                  </div>
+                  <div>
+                    <Link
+                      href={`/view-invoice/${invoice?._id}`}
+                      className="paid__status "
+                    >
+                      View
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
 };
 
 // const data = [
